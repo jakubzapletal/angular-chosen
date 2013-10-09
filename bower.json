@@ -1,0 +1,7 @@
+{
+  "name": "angular-chosen",
+  "version": "1.0",
+  "main": "./chosen.js",
+  "dependencies": {
+  }
+}
