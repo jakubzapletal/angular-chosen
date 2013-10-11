@@ -3,7 +3,9 @@ angular.module('localytics.directives', [])
 angular.module('localytics.directives').directive 'chosen', ['$timeout', ($timeout) ->
   
   # This is stolen from Angular...
-  NG_OPTIONS_REGEXP = NG_OPTIONS_REGEXP = /^\s*(.*?)(?:\s+as\s+(.*?))?(?:\s+group\s+by\s+(.*))?\s+for\s+(?:([\$\w][\$\w\d]*)|(?:\(\s*([\$\w][\$\w\d]*)\s*,\s*([\$\w][\$\w\d]*)\s*\)))\s+in\s+(.*?)(?:\s+track\s+by\s+(.*?))?$/
+  NG_OPTIONS_REGEXP = /^\s*(.*?)(?:\s+as\s+(.*?))?(?:\s+group\s+by\s+(.*))?\s+for\s+(?:([\$\w][\$\w\d]*)|(?:\(\s*([\$\w][\$\w\d]*)\s*,\s*([\$\w][\$\w\d]*)\s*\)))\s+in\s+(.*?)(?:\s+track\s+by\s+(.*?))?$/
+
+  NG_OPTIONS_REGEXP_FILTER = /^\s*(.*?)(?:\s+|\s+(.*?))$/
 
   # Whitelist of options that will be parsed from the element's attributes and passed into Chosen
   CHOSEN_OPTION_WHITELIST = [
@@ -60,6 +62,7 @@ angular.module('localytics.directives').directive 'chosen', ['$timeout', ($timeo
       if attr.ngOptions
         match = attr.ngOptions.match(NG_OPTIONS_REGEXP)
         valuesExpr = match[7]
+        valuesExpr = valuesExpr.match(NG_OPTIONS_REGEXP_FILTER)[1] unless valuesExpr.match(NG_OPTIONS_REGEXP_FILTER) is null
 
         # There's no way to tell if the collection is a promise since $parse hides this from us, so just
         # assume it is a promise if undefined, and show the loader
