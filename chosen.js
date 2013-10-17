@@ -75,7 +75,7 @@
                   return disableWithMessage(options.no_results_text || 'No values available');
                 }
               }
-            });
+            }, true);
           }
         }
       };

@@ -71,4 +71,5 @@ angular.module('localytics.directives').directive 'chosen', ['$timeout', ($timeo
           unless newVal is oldVal
             stopLoading()
             disableWithMessage(options.no_results_text || 'No values available') if isEmpty(newVal)
+        , true
 ]
